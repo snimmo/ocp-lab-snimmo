@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: cluster-project        
+  namespace: openshift-gitops
+spec:
+  description: "Cluster Applications"
+  sourceRepos:
+    - 'https://github.com/snimmo/ocp-lab-snimmo.git'
+  destinations:
+    - server: 'https://kubernetes.default.svc'
+      namespace: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-application
+  namespace: openshift-gitops
+spec:
+  project: cluster-project
+  source:
+    repoURL: 'https://github.com/snimmo/ocp-lab-snimmo.git'
+    targetRevision: 'main'
+    path: 'cluster/applications'
+    directory:
+      recurse: true
+  destination:
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      prune: true                 
+      selfHeal: true            
+    syncOptions:
+      - CreateNamespace=true

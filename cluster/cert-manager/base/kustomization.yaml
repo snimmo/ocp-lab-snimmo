@@ -1,0 +1,3 @@
+resources:
+  - cert-manager-operator-operator-group.yaml
+  - openshift-cert-manager-operator-subscription.yaml
