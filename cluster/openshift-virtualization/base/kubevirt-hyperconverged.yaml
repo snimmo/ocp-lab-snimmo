@@ -3,4 +3,6 @@ kind: HyperConverged
 metadata:
   name: kubevirt-hyperconverged
   namespace: openshift-cnv
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
 spec:
