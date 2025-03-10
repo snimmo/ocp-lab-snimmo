@@ -1,0 +1,3 @@
+resources:
+  - openshift-storage-operator-group.yaml
+  - odf-operator-subscription.yaml
