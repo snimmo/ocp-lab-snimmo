@@ -1,0 +1,3 @@
+resources:
+  - openshift-cnv-operator-group.yaml
+  - kubevirt-hyperconverged-subscription.yaml

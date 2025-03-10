@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: openshift-virtualization-application
+  namespace: openshift-gitops
+spec:
+  project: cluster-project
+  source:
+    repoURL: 'https://github.com/snimmo/ocp-lab-snimmo.git'
+    targetRevision: 'main'
+    path: 'cluster/openshift-virtualization/overlays/default'
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: 'openshift-cnv'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
